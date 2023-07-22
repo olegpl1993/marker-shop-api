@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import ApiService from './apiService';
+import ApiService from './src/apiService';
 
 const PORT = process.env.PORT || 5555;
 const app = express();
@@ -8,6 +8,21 @@ app.use(cors());
 
 const apiService = new ApiService();
 apiService.fetchData();
+
+app.get('/', async (req, res) => {
+  res.setHeader('Content-Type', 'text/html');
+  res.send(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>Hello CORS</title>
+        </head>
+        <body>
+          <h1>Test page</h1>
+        </body>
+      </html>
+    `);
+});
 
 app.get('/products', async (req, res) => {
   try {
