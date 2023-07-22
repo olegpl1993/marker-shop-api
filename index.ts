@@ -15,10 +15,10 @@ app.get('/', async (req, res) => {
       <!DOCTYPE html>
       <html>
         <head>
-          <title>Hello CORS</title>
+          <title>Test Page</title>
         </head>
         <body>
-          <h1>Test page</h1>
+          <h1>Test page marker-shop-api</h1>
         </body>
       </html>
     `);
@@ -30,15 +30,15 @@ app.get('/products', async (req, res) => {
     res.status(200);
     const data = apiService.getData();
     if (data) {
-      res.end(JSON.stringify(data));
+      res.send(JSON.stringify(data));
     } else {
       await apiService.fetchData();
       const updatedData = apiService.getData();
-      res.end(JSON.stringify(updatedData));
+      res.send(JSON.stringify(updatedData));
     }
   } catch (error) {
     res.status(500);
-    res.end(JSON.stringify({ error: 'Failed to fetch data' }));
+    res.send(JSON.stringify({ error: 'Failed to fetch data' }));
   }
 });
 
