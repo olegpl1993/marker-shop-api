@@ -30,11 +30,11 @@ app.get('/products', async (req, res) => {
     res.status(200);
     const data = apiService.getData();
     if (data) {
-      res.send(JSON.stringify(data));
+      res.send(JSON.stringify({ Hello: 'World' }));
     } else {
       await apiService.fetchData();
       const updatedData = apiService.getData();
-      res.send(JSON.stringify(updatedData));
+      res.send(JSON.stringify({ Hello: 'World' }));
     }
   } catch (error) {
     res.status(500);
