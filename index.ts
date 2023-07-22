@@ -28,14 +28,15 @@ app.get('/products', async (req, res) => {
   try {
     res.setHeader('Content-Type', 'application/json');
     res.status(200);
-    const data = apiService.getData();
-    if (data) {
-      res.send(JSON.stringify({ Hello: 'World' }));
-    } else {
-      await apiService.fetchData();
-      const updatedData = apiService.getData();
-      res.send(JSON.stringify({ Hello: 'World' }));
-    }
+    // const data = apiService.getData();
+    // if (data) {
+    //   res.send(JSON.stringify(data));
+    // } else {
+    //   await apiService.fetchData();
+    //   const updatedData = apiService.getData();
+    //   res.send(JSON.stringify(updatedData));
+    // }
+    res.send(JSON.stringify({ hello: 'products' }));
   } catch (error) {
     res.status(500);
     res.send(JSON.stringify({ error: 'Failed to fetch data' }));
