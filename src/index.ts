@@ -9,12 +9,18 @@ app.use(cors());
 const apiService = new ApiService();
 apiService.fetchData();
 
-app.get('/products', (req, res) => {
+app.get('/products', async (req, res) => {
   try {
-    const data = apiService.getData();
     res.setHeader('Content-Type', 'application/json');
     res.status(200);
-    res.end(JSON.stringify(data));
+    const data = apiService.getData();
+    if (data) {
+      res.end(JSON.stringify(data));
+    } else {
+      await apiService.fetchData();
+      const updatedData = apiService.getData();
+      res.end(JSON.stringify(updatedData));
+    }
   } catch (error) {
     res.status(500);
     res.end(JSON.stringify({ error: 'Failed to fetch data' }));
